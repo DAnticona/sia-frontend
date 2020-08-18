@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Trinus-Frontend"
+    }
+  },
+  "defaultProject": "Trinus-Frontend",
+  "cli": {
+    "analytics": false
+  }
 }

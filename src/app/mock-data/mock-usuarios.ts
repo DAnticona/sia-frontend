@@ -1,0 +1,63 @@
+// import { Usuario } from '../models/usuario.model';
+// export const USUARIOS: Usuario[] = [
+// 	{
+// 		coPers: '234565',
+// 		noPers: 'Alan',
+// 		apPate: 'Aguilar',
+// 		sexo: 'M',
+// 		correo: 'aaguilar@wollcorp.com',
+// 		coUsua: '987645',
+// 		noUsua: 'aaguilar',
+// 		passwd: '123456',
+// 		imagen: 'assets/images/users/234565.png',
+// 		rol: {
+// 			idRol: 435,
+// 			nombre: 'OPERADOR_ROLE',
+// 		},
+// 	},
+// 	{
+// 		coPers: '125476',
+// 		noPers: 'Juan',
+// 		apPate: 'Benito',
+// 		sexo: 'M',
+// 		correo: 'jbenito@wollcorp.com',
+// 		coUsua: '213456',
+// 		noUsua: 'jbenito',
+// 		passwd: '123456',
+// 		imagen: 'assets/images/users/125476.png',
+// 		rol: {
+// 			idRol: 435,
+// 			nombre: 'OPERADOR_ROLE',
+// 		},
+// 	},
+// 	{
+// 		coPers: '234512',
+// 		noPers: 'Mayra',
+// 		apPate: 'Levano',
+// 		sexo: 'F',
+// 		correo: 'mlevano@wollcorp.com',
+// 		coUsua: '124367',
+// 		noUsua: 'mlevano',
+// 		passwd: '123456',
+// 		imagen: 'assets/images/users/234512.png',
+// 		rol: {
+// 			idRol: 321,
+// 			nombre: 'ADMIN_ROLE',
+// 		},
+// 	},
+// 	{
+// 		coPers: '325687',
+// 		noPers: 'David',
+// 		apPate: 'Anticona',
+// 		sexo: 'M',
+// 		correo: 'danticona@wollcorp.com',
+// 		coUsua: '908756',
+// 		noUsua: 'danticona',
+// 		passwd: '123456',
+// 		imagen: 'assets/images/users/325687.png',
+// 		rol: {
+// 			idRol: 321,
+// 			nombre: 'ADMIN_ROLE',
+// 		},
+// 	},
+// ];

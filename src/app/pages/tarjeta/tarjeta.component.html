@@ -1,0 +1,994 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<form #f="ngForm" (ngSubmit)="guardar(f)" ngNativeValidate>
+					<div class="form-body">
+						<h5 class="box-title">Datos del Cliente</h5>
+						<hr />
+						<div class="row txt-10">
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-5">
+										<label class="control-label"><b>Orden</b></label>
+									</div>
+									<div class="col-7">
+										<label>{{ tarjeta.nroOrden }}</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-5">
+										<label class="control-label"><b>Transporte</b></label>
+									</div>
+									<div class="col-7">
+										<label>{{ tarjeta.viaTransporte }}</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-5">
+										<label class="control-label"><b>Fecha</b></label>
+									</div>
+									<div class="col-7">
+										<label>{{ tarjeta.fecha | date: 'dd/MM/yyyy' }}</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10">
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-5">
+										<label class="control-label"><b>RUC</b></label>
+									</div>
+									<div class="col-7">
+										<label>{{ tarjeta.cliente.nuDoc }}</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-5">
+										<label class="control-label"><b>Cliente</b></label>
+									</div>
+									<div class="col-7">
+										<label>{{ tarjeta.cliente.raSoc }}</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="box-title m-t-20">Facturacion por Almacenaje</h5>
+						<hr />
+						<div class="row txt-10 justify-content-md-around">
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-6">
+										<label><b>Carta</b></label>
+									</div>
+									<div class="col-6">
+										{{ tarjeta.nroOrden }}
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-6">
+										<label><b>% Merc.</b></label>
+									</div>
+									<div class="col-6">
+										{{ tarjeta.cliente.pctMerca | number: '1.2-2' }}
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-6">
+										<label><b>% Seg.</b></label>
+									</div>
+									<div class="col-6">
+										{{ tarjeta.cliente.vaPctSeguro | number: '1.2-2' }}
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-6">
+										<label><b>P. Seg.</b></label>
+									</div>
+									<div class="col-6">
+										{{ tarjeta.cliente.facPolSeguro | number: '1.2-2' }}
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-6">
+										<label><b>Moneda</b></label>
+									</div>
+									<div class="col-6">
+										{{ tarjeta.cliente.tiMoneda }}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row m-t-20 txt-10 justify-content-md-around">
+							<div class="col-lg-2">
+								<h6 class="text-center">Facturación</h6>
+								<table class="table table-sm table-borderless">
+									<tbody>
+										<tr>
+											<th>Cont 20'</th>
+											<td class="text-right">{{ tarjeta.cliente.facCont20 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Cont 40'</th>
+											<td class="text-right">{{ tarjeta.cliente.facCont40 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>C.S. 30m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.facCargSuelta30m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>C. por m<sup>2</sup></th>
+											<td class="text-right">0.00</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center col-lg-2">
+								<h6>Montacarga</h6>
+								<table class="table table-sm table-borderless">
+									<tbody>
+										<tr>
+											<th>Cont 20'</th>
+											<td class="text-right">{{ tarjeta.cliente.monCont20 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Cont 40'</th>
+											<td class="text-right">{{ tarjeta.cliente.monCont40 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>C.S. 15m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.monCargSuelta15m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Alq. 4TN</th>
+											<td class="text-right">{{ tarjeta.cliente.monAlq4Tn2H | number: '1.2-2' }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center col-lg-2">
+								<h6>Personal Est.</h6>
+								<table class="table table-sm table-borderless">
+									<tbody>
+										<tr>
+											<th>Cont 20'</th>
+											<td class="text-right">{{ tarjeta.cliente.estCont20 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Cont 40'</th>
+											<td class="text-right">{{ tarjeta.cliente.estCont40 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>C.S. 20m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.estCargSuelta20m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Desp. Parc.</th>
+											<td class="text-right">{{ tarjeta.cliente.despParcial | number: '1.2-2' }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center col-lg-2">
+								<h6>Movilización Carga</h6>
+								<table class="table table-sm table-borderless">
+									<tbody>
+										<tr>
+											<th>0 - 20m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.movCarga0a20m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>20 - 35m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.movCarga20a35m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>35 - 60m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.movCarga40a60m3 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>S. Extra.</th>
+											<td class="text-right">{{ tarjeta.cliente.servExtraXHora | number: '1.2-2' }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center col-lg-2">
+								<h6>Forrado Carga</h6>
+								<table class="table table-sm table-borderless">
+									<tbody>
+										<tr>
+											<th>Cont 20'</th>
+											<td class="text-right">{{ tarjeta.cliente.forrCargaCont20 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>Cont 40'</th>
+											<td class="text-right">{{ tarjeta.cliente.forrCargaCont40 | number: '1.2-2' }}</td>
+										</tr>
+										<tr>
+											<th>C.S. 20m<sup>3</sup></th>
+											<td class="text-right">{{ tarjeta.cliente.forrCargaSuelta | number: '1.2-2' }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<h5 class="box-title">Tarjeta</h5>
+						<hr />
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="declarante">
+										<b>Declarante</b>
+									</label>
+									<button
+										type="button"
+										class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+										data-toggle="modal"
+										data-target="#agencias"
+									>
+										<i class="fa fa-search"></i>
+									</button>
+									<div class="row">
+										<div class="col-lg-3">
+											<input
+												id="declarante"
+												[(ngModel)]="tarjeta.declarante.coEmp"
+												name="coDecla"
+												type="text"
+												class="form-control form-control-sm"
+												disabled
+											/>
+										</div>
+										<div class="col-lg-9">
+											<input
+												type="text"
+												[(ngModel)]="tarjeta.declarante.raSoc"
+												name="noDecla"
+												class="form-control form-control-sm"
+												disabled
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="facComercial">
+										<b>Factura Comercial</b>
+									</label>
+									<input
+										id="facComercial"
+										[(ngModel)]="tarjeta.nroFactComercial"
+										name="facComercial"
+										type="text"
+										class="form-control form-control-sm"
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="ubicacion">
+										<b>Ubicación</b>
+									</label>
+									<button
+										type="button"
+										class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+										data-toggle="modal"
+										data-target="#ubicaciones"
+									>
+										<i class="fa fa-search"></i>
+									</button>
+									<input
+										type="text"
+										[(ngModel)]="tarjeta.ubicacion"
+										name="ubicacion"
+										class="form-control form-control-sm"
+										disabled
+									/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="mercaderia">
+										<b>Tipo Mercancía</b>
+									</label>
+									<button
+										type="button"
+										class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+										data-toggle="modal"
+										data-target="#mercaderias"
+									>
+										<i class="fa fa-search"></i>
+									</button>
+									<input
+										id="mercaderia"
+										[(ngModel)]="tarjeta.tiMercancia"
+										name="mercaderia"
+										type="text"
+										class="form-control form-control-sm"
+										disabled
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="destino">
+										<b>Destino</b>
+									</label>
+									<button
+										type="button"
+										class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+										data-toggle="modal"
+										data-target="#destinos"
+									>
+										<i class="fa fa-search"></i>
+									</button>
+									<input
+										type="text"
+										[(ngModel)]="tarjeta.destino"
+										name="destino"
+										class="form-control form-control-sm"
+										disabled
+									/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="clase">
+												<b>Clase</b>
+											</label>
+											<button
+												type="button"
+												class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+												data-toggle="modal"
+												data-target="#clases"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+											<input
+												id="clase"
+												[(ngModel)]="tarjeta.clase"
+												name="clase"
+												type="text"
+												class="form-control form-control-sm"
+												disabled
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="fob">
+												<b>FOB</b>
+											</label>
+											<input
+												id="fob"
+												[ngModel]="tarjeta.fob | number: '1.2-2'"
+												(ngModelChange)="tarjeta.fob = $event"
+												name="fob"
+												type="text"
+												class="form-control form-control-sm text-right"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="declaracion">
+												<b>N° Declaración</b>
+											</label>
+											<input
+												id="declaracion"
+												[(ngModel)]="tarjeta.nroDeclaracion"
+												name="declaracion"
+												type="text"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="feNumeracion">
+												<b>Fecha Numeración</b>
+											</label>
+											<input
+												id="feNumeracion"
+												[ngModel]="tarjeta.fechaNumeracion | date: 'yyy-MM-dd'"
+												(ngModelChange)="tarjeta.fechaNumeracion = $event"
+												name="feNumeracion"
+												type="date"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="feFacComercial">
+												<b>Fecha Fac. Comercial</b>
+											</label>
+											<input
+												id="feFacComercial"
+												[ngModel]="tarjeta.fechaFactComercial | date: 'yyy-MM-dd'"
+												name="feFacComercial"
+												(ngModelChange)="tarjeta.fechaFactComercial = $event"
+												type="date"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="flete">
+												<b>Flete</b>
+											</label>
+											<input
+												id="flete"
+												type="text"
+												[ngModel]="tarjeta.flete | number: '1.2-2'"
+												(ngModelChange)="tarjeta.flete = $event"
+												name="flete"
+												class="form-control form-control-sm text-right"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="manifiesto">
+												<b>Manifiesto</b>
+											</label>
+											<input
+												id="manifiesto"
+												[(ngModel)]="tarjeta.nroManifiesto"
+												name="manifiesto"
+												type="text"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="feVencimiento">
+												<b>Fecha Vcto.</b>
+											</label>
+											<input
+												id="feVencimiento"
+												[ngModel]="tarjeta.fechaVcto | date: 'yyy-MM-dd'"
+												(ngModelChange)="tarjeta.fechaVcto = $event"
+												name="feVencimiento"
+												type="date"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="subpartida">
+												<b>Subpartida Nacional</b>
+											</label>
+											<input
+												id="subpartida"
+												[(ngModel)]="tarjeta.subpartidaNac"
+												name="subpartida"
+												type="text"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="seguro">
+												<b>Seguro</b>
+											</label>
+											<input
+												id="seguro"
+												type="text"
+												[ngModel]="tarjeta.seguro | number: '1.2-2'"
+												(ngModelChange)="tarjeta.seguro = $event"
+												name="seguro"
+												class="form-control form-control-sm text-right"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="deposito">
+										<b>Dep. Temporal</b>
+									</label>
+									<button
+										type="button"
+										class="btn waves-effect waves-light btn-rounded btn-xs btn-info"
+										data-toggle="modal"
+										data-target="#depositos"
+									>
+										<i class="fa fa-search"></i>
+									</button>
+									<input
+										id="deposito"
+										[(ngModel)]="tarjeta.depTemporal"
+										name="deposito"
+										type="text"
+										class="form-control form-control-sm"
+										disabled
+									/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="vap">
+												<b>VAP / AVI</b>
+											</label>
+											<input
+												id="vap"
+												[(ngModel)]="tarjeta.vapAvi"
+												name="vapAvi"
+												type="text"
+												class="form-control form-control-sm"
+											/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="ajuste">
+												<b>Ajuste</b>
+											</label>
+											<input
+												id="ajuste"
+												[ngModel]="tarjeta.ajuste | number: '1.2-2'"
+												(ngModelChange)="tarjeta.ajuste = $event"
+												name="ajuste"
+												type="text"
+												class="form-control form-control-sm text-right"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="mr-2" for="transporte">
+										<b>Doc. Transporte</b>
+									</label>
+									<input
+										id="transporte"
+										[(ngModel)]="tarjeta.docTransporte"
+										name="transporte"
+										type="text"
+										class="form-control form-control-sm"
+									/>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label class="mr-2" for="cont20">
+														<b># Cont 20'</b>
+													</label>
+													<input
+														id="cont20"
+														[(ngModel)]="tarjeta.nroCont20CargSuelta"
+														name="cont20"
+														type="number"
+														class="form-control form-control-sm"
+													/>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label class="mr-2" for="cont40">
+														<b># Cont 40'</b>
+													</label>
+													<input
+														id="cont40"
+														[(ngModel)]="tarjeta.nroCont40"
+														name="cont40"
+														type="number"
+														class="form-control form-control-sm"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="mr-2" for="total">
+												<b>Total</b>
+											</label>
+											<input
+												id="total"
+												type="text"
+												[ngModel]="tarjeta.total | number: '1.2-2'"
+												(ngModelChange)="tarjeta.total = $event"
+												name="total"
+												class="form-control form-control-sm bg-warning text-right font-bold"
+												disabled
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="mr-2" for="mercanderias">
+										<b>Mercaderías</b>
+									</label>
+									<input
+										id="mercanderias"
+										[(ngModel)]="tarjeta.mercancia"
+										name="mercaderia"
+										type="text"
+										class="form-control form-control-sm"
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="row txt-10 justify-content-md-center">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="mr-2" for="obs">
+										<b>Observaciones</b>
+									</label>
+									<input
+										id="obs"
+										[(ngModel)]="tarjeta.observaciones"
+										name="obs"
+										type="text"
+										class="form-control form-control-sm"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row txt-10 justify-content-md-center">
+						<div class="col-md-4">
+							<div class="custom-control custom-checkbox">
+								<input
+									type="checkbox"
+									[(ngModel)]="tarjeta.levanteMercaderia"
+									name="levanteMerca"
+									class="custom-control-input"
+									id="levanteMerca"
+								/>
+								<label class="custom-control-label" for="levanteMerca"><b>Levante Mercadería</b></label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="custom-control custom-checkbox">
+								<input
+									type="checkbox"
+									[(ngModel)]="tarjeta.paraVoBo"
+									name="vobo"
+									class="custom-control-input"
+									id="vobo"
+								/>
+								<label class="custom-control-label" for="vobo"><b>Para VoBo</b></label>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="custom-control custom-checkbox">
+								<input
+									type="checkbox"
+									[(ngModel)]="tarjeta.factDolares"
+									name="dolares"
+									class="custom-control-input"
+									id="dolares"
+								/>
+								<label class="custom-control-label" for="dolares"><b>Facturación Dólares</b></label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-actions">
+								<button type="submit" class="btn btn-success"><i class="fa fa-save fa-fw"></i>Guardar</button>
+								<button type="button" routerLink="/aperturar-tarjeta" class="btn btn-inverse">
+									Cancel
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<!-- Agencias -->
+<div
+	class="modal fade"
+	id="agencias"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="agenciasLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="agenciasLabel">Agencias</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>RUC</th>
+							<th>Razón Social</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let agencia of agencias" (dblclick)="seleccionaAgencia(agencia)">
+							<td>{{ agencia.nuDoc }}</td>
+							<td>{{ agencia.raSoc }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Ubicaciones -->
+<div
+	class="modal fade"
+	id="ubicaciones"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="ubicacionesLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ubicacionesLabel">Ubicaciones</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>Ubicación</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let ubicacion of ubicaciones" (dblclick)="seleccionaUbicacion(ubicacion)">
+							<td>{{ ubicacion.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Mercaderías -->
+<div
+	class="modal fade"
+	id="mercaderias"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="mercaderiasLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="mercaderiasLabel">Mercaderías</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>Mercadería</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let mercaderia of mercaderias" (dblclick)="seleccionaMercaderia(mercaderia)">
+							<td>{{ mercaderia.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Depositos -->
+<div
+	class="modal fade"
+	id="depositos"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="depositosLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="depositosLabel">Depósitos</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>Depósito</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let deposito of depositos" (dblclick)="seleccionaDeposito(deposito)">
+							<td>{{ deposito.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Clases -->
+<div
+	class="modal fade"
+	id="clases"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="clasesLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="clasesLabel">Clases</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>Clase</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let clase of clases" (dblclick)="seleccionaClase(clase)">
+							<td>{{ clase.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Destinos -->
+<div
+	class="modal fade"
+	id="destinos"
+	data-backdrop="static"
+	data-keyboard="false"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="destinosLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="destinosLabel">Destinos</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover pointer">
+					<thead class="thead-dark text-center">
+						<tr>
+							<th>Destino</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let destino of destinos" (dblclick)="seleccionaDestino(destino)">
+							<td>{{ destino.nombre }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<!-- <button type="button" class="btn btn-primary" (click)="seleccionaAgencia(agencia)">Aceptar</button> -->
+			</div>
+		</div>
+	</div>
+</div>

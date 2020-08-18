@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-8">
+		<div class="chart">
+			<canvas
+				baseChart
+				[data]="pieChartData"
+				[labels]="pieChartLabels"
+				[chartType]="pieChartType"
+				[options]="pieChartOptions"
+				[plugins]="pieChartPlugins"
+				[colors]="pieChartColors"
+				[legend]="pieChartLegend"
+			>
+			</canvas>
+		</div>
+	</div>
+	<div class="col-md-4 text-center">
+		<div class="m-3">
+			<button class="btn btn-rounded btn-outline-primary" (click)="addSlice()">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+		<div class="m-3">
+			<button class="btn btn-rounded btn-outline-danger" (click)="removeSlice()">
+				<i class="fa fa-minus"></i>
+			</button>
+		</div>
+		<div class="m-3">
+			<button class="btn btn-rounded btn-outline-info" (click)="changeLabels()">
+				<i class="mdi mdi-repeat"></i>
+			</button>
+		</div>
+		<div class="m-3">
+			<button class="btn btn-rounded btn-outline-secondary" (click)="changeLegendPosition()">
+				<i class="mdi mdi-chart-bubble"></i>
+			</button>
+		</div>
+		<div class="custom-control custom-checkbox mr-sm-2">
+			<input
+				type="checkbox"
+				class="custom-control-input"
+				(change)="pieChartLegend = !pieChartLegend"
+				id="leyenda"
+			/>
+			<label class="custom-control-label" for="leyenda">Leyenda</label>
+		</div>
+	</div>
+</div>

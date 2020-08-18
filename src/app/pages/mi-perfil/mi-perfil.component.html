@@ -1,0 +1,265 @@
+<div class="row">
+	<div class="col-8">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Datos Personales</h4>
+				<h6 class="card-subtitle">{{ usuario.nombres }} {{ usuario.apellidoPaterno }}</h6>
+				<table class="table table-borderless">
+					<tbody>
+						<tr *ngIf="!editarNoPers">
+							<th>Nombres</th>
+							<td>{{ usuario.nombres }}</td>
+							<td>
+								<button (click)="editarNoPers = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarNoPers">
+							<th>Nombres</th>
+							<td>
+								<input
+									[(ngModel)]="usuario.nombres"
+									name="nombres"
+									type="text"
+									class="form-control form-control-sm"
+									placeholder="Nombres"
+								/>
+							</td>
+							<td>
+								<button (click)="editarNoPers = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarNoPers = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="!editarApPate">
+							<th>Apellido Paterno</th>
+							<td>{{ usuario.apellidoPaterno }}</td>
+							<td>
+								<button (click)="editarApPate = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarApPate">
+							<th>Apellido Paterno</th>
+							<td>
+								<input
+									[(ngModel)]="usuario.apellidoPaterno"
+									name="apellidoPaterno"
+									type="text"
+									class="form-control form-control-sm"
+									placeholder="Apellido paterno"
+								/>
+							</td>
+							<td>
+								<button (click)="editarApPate = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarApPate = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="!editarApMate">
+							<th>Apellido Materno</th>
+							<td>{{ usuario.apellidoMaterno }}</td>
+							<td>
+								<button (click)="editarApMate = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarApMate">
+							<th>Apellido Materno</th>
+							<td>
+								<input
+									[(ngModel)]="usuario.apellidoMaterno"
+									name="apellidoMaterno"
+									type="text"
+									class="form-control form-control-sm"
+									placeholder="Apellido materno"
+								/>
+							</td>
+							<td>
+								<button (click)="editarApMate = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarApMate = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="!editarCorreo">
+							<th>Correo Electrónico</th>
+							<td>{{ usuario.email }}</td>
+							<td>
+								<button (click)="editarCorreo = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarCorreo">
+							<th>Correo Electrónico</th>
+							<td>
+								<input
+									[(ngModel)]="usuario.email"
+									name="email"
+									type="email"
+									class="form-control form-control-sm"
+									placeholder="Correo electrónico"
+								/>
+							</td>
+							<td>
+								<button (click)="editarCorreo = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarCorreo = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="!editarSexo">
+							<th>Sexo</th>
+							<td>{{ usuario.sexo }}</td>
+							<td>
+								<button (click)="editarSexo = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarSexo">
+							<th>Sexo</th>
+							<td>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input
+										[(ngModel)]="usuario.sexo"
+										name="sexo"
+										type="radio"
+										id="customRadioInline1"
+										name="customRadioInline1"
+										class="custom-control-input"
+										value="M"
+									/>
+									<label class="custom-control-label" for="customRadioInline1">Masculino</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input
+										[(ngModel)]="usuario.sexo"
+										name="sexo"
+										type="radio"
+										id="customRadioInline2"
+										name="customRadioInline1"
+										class="custom-control-input"
+										value="F"
+									/>
+									<label class="custom-control-label" for="customRadioInline2">Femenino</label>
+								</div>
+							</td>
+							<td>
+								<button (click)="editarSexo = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarSexo = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="card">
+			<div class="card-body text-center">
+				<h4 class="card-title">Imagen de Usuario</h4>
+				<h6 class="card-subtitle">{{ usuario.nombres }} {{ usuario.apellidoPaterno }}</h6>
+				<img *ngIf="usuario.imagen" [src]="usuario.imagen" class="img-200" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-8">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Datos de Usuario</h4>
+				<h6 class="card-subtitle">{{ usuario.nombres }} ({{ usuario.rol.nombre }})</h6>
+				<table class="table table-borderless">
+					<tbody>
+						<tr>
+							<th>Nombre de usuario</th>
+							<td>{{ usuario.nombres }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Rol</th>
+							<td>{{ usuario.rol.nombre }}</td>
+							<td></td>
+						</tr>
+						<tr *ngIf="!editarPasswd">
+							<th>Contraseña</th>
+							<td>******</td>
+							<td>
+								<button (click)="editarPasswd = true" class="btn btn-outline-primary">
+									<i class="fa fa-edit"></i>
+								</button>
+							</td>
+						</tr>
+						<tr *ngIf="editarPasswd">
+							<th>Contraseña</th>
+							<td>
+								<input
+									ngModel
+									name="password"
+									type="password"
+									class="form-control form-control-sm"
+									placeholder="Contraseña actual"
+								/>
+							</td>
+							<td></td>
+						</tr>
+						<tr *ngIf="editarPasswd">
+							<th>Nueva Contarseña</th>
+							<td>
+								<input
+									ngModel
+									name="passwd1"
+									type="password"
+									class="form-control form-control-sm"
+									placeholder="Nueva Contraseña"
+								/>
+							</td>
+							<td></td>
+						</tr>
+						<tr *ngIf="editarPasswd">
+							<th>Repetir Contarseña</th>
+							<td>
+								<input
+									ngModel
+									name="passwd2"
+									type="password"
+									class="form-control form-control-sm"
+									placeholder="Nueva Contraseña"
+								/>
+							</td>
+							<td>
+								<button (click)="editarPasswd = false" class="btn btn-outline-success">
+									<i class="fa fa-save"></i>
+								</button>
+								<button (click)="editarPasswd = false" class="btn btn-outline-dark">
+									<i class="fa fa-close"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+.pointer {
+	cursor: pointer;
+}
+
+.img-200 {
+	width: 200px;
+}
+
+.img-150 {
+	width: 150px;
+}
+
+.img-100 {
+	width: 100px;
+}
+
+.img-50 {
+	width: 50px;
+}
+
+.txt-10 {
+	font-size: 10pt;
+}
