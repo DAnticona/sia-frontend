@@ -1,0 +1,109 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="form-group">
+			<select #tipo class="form-control">
+				<option value="1">Nro. Doc</option>
+				<option value="2">Nombre</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<div class="form-group">
+			<input
+				#termino
+				type="text"
+				class="form-control"
+				id="inputPassword2"
+				placeholder="Búsqueda de Clientes"
+				(keyup.enter)="search(tipo.value, termino.value)"
+			/>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group">
+			<button class="btn btn-outline-info btn-block mb-2" (click)="search(tipo.value, termino.value)">
+				<i class="fa fa-search fa-fw"></i>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div *ngIf="!cargando" class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-hover color-table info-table table-sm txt-10">
+				<thead>
+					<tr class="text-sm-center">
+						<th>Id</th>
+						<th>Tipo</th>
+						<th>Nombre o Razón Social</th>
+						<th>Documento</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						class="pointer"
+						*ngFor="let c of clientes"
+						(dblclick)="sendClient()"
+						[ngClass]="{ 'bg-light-info': cliente.idCliente == c.idCliente }"
+						(click)="selectClient(c)"
+					>
+						<td>{{ c.idCliente }}</td>
+						<td>{{ c.tipoPersona.abreviatura }}</td>
+						<td *ngIf="c.persona">{{ c.persona.nombres }} {{ c.persona.apellidoPaterno }}</td>
+						<td *ngIf="c.empresa">{{ c.empresa.razonSocial }}</td>
+						<td *ngIf="c.persona">{{ c.persona.numeroDocumento }}</td>
+						<td *ngIf="c.empresa">{{ c.empresa.ruc }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav *ngIf="pages > 1" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li *ngIf="pageNu !== 1 && pageNu !== 2" class="page-item">
+					<a class="page-link pointer" (click)="getClients(pageNu - 2)" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li *ngIf="pageNu !== 1" class="page-item">
+					<a class="page-link pointer" (click)="getClients(pageNu - 1)">{{ pageNu - 1 }}</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link pointer bg-light-info" (click)="getClients(pageNu)">{{ pageNu }}</a>
+				</li>
+				<li *ngIf="pageNu !== pages" class="page-item">
+					<a class="page-link pointer" (click)="getClients(pageNu + 1)">{{ pageNu + 1 }}</a>
+				</li>
+				<li *ngIf="pageNu !== pages && pageNu != pages - 1" class="page-item">
+					<a class="page-link pointer" (click)="getClients(pageNu + 2)" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="row">
+			<div class="col-md-12 text-right">
+				<button class="btn btn-outline-danger waves-effect waves-light m-r-10" (click)="cancelar()">
+					Cancelar
+				</button>
+				<button
+					type="submit"
+					class="btn btn-outline-success waves-effect waves-light m-r-10"
+					(click)="sendClient()"
+				>
+					Seleccionar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

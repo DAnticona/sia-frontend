@@ -1,5 +1,5 @@
 import { Empresa } from '../models/empresa.model';
-export const AGENCIAS: Empresa[] = [
+export const AGENCIAS: any[] = [
 	{
 		coEmp: '004',
 		nuDoc: '123456',

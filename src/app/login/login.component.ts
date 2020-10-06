@@ -15,11 +15,12 @@ declare function login_plugin();
 	styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-	allMenu: Menu[] = MENU;
+	// allMenu: Menu[] = MENU;
 
 	error: string;
 	recordarme = false;
 	username: string;
+	cargando = false;
 
 	constructor(public router: Router, public usuarioService: UsuarioService) {}
 
@@ -32,43 +33,24 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	public login(forma: NgForm): void {
-		if (forma.invalid) {
+	login(form: NgForm) {
+		this.cargando = true;
+		if (form.invalid) {
 			return;
 		}
-		let usuario = new Usuario();
-		usuario.username = forma.value.username;
-		usuario.password = forma.value.password;
 
-		this.usuarioService.login(usuario, forma.value.recordarme).subscribe(
-			(res: any) => {
+		let user: any = {};
+		user.username = form.value.username;
+		user.password = form.value.password;
+
+		this.usuarioService.login(user, form.value.recordarme).subscribe(
+			res => {
 				console.log(res);
-				let user = new Usuario();
-				let rol = new Rol();
-
-				rol.nombre = res.rol;
-				user.nombres = res.name;
-				user.apellidoPaterno = res.lastname;
-				user.email = res.email;
-				user.rol = rol;
-
-				if (!res.imagen) {
-					user.imagen = 'assets/images/users/325687.png';
-				}
-
-				let menu: Menu[];
-
-				if (user.rol.nombre === 'ADMIN') {
-					menu = this.allMenu;
-				} else {
-					menu = this.allMenu.filter(m => m.noRol === 'USER');
-				}
-				this.usuarioService.guardarStorage(user, true, menu);
+				this.cargando = false;
 				this.router.navigate(['/bienvenido']);
 			},
 			(err: any) => {
-				console.log(err);
-				this.error = err.error.message;
+				this.cargando = false;
 			}
 		);
 	}

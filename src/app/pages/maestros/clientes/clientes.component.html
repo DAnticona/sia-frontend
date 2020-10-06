@@ -1,0 +1,125 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<select #tipo class="form-control">
+								<option value="1">Nro. Doc</option>
+								<option value="2">Nombre</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="form-group">
+							<input
+								#termino
+								type="text"
+								class="form-control"
+								id="inputPassword2"
+								placeholder="Búsqueda de Clientes"
+								(keyup.enter)="search(tipo.value, termino.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group">
+							<button class="btn btn-outline-info btn-block mb-2" (click)="search(tipo.value, termino.value)">
+								<i class="fa fa-search fa-fw"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Clientes</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th></th>
+								<th>Id</th>
+								<th>Tipo</th>
+								<th>Nombre o Razón Social</th>
+								<th>Documento</th>
+								<th>Dirección</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="pointer" *ngFor="let cliente of clientes" (dblclick)="dbClick(cliente)">
+								<td>
+									<button class="btn btn-outline-secondary btn-sm" (click)="dbClick(cliente)">
+										<i class="fa fa-eye"></i>
+									</button>
+								</td>
+								<td>{{ cliente.idCliente }}</td>
+								<td>{{ cliente.tipoPersona.abreviatura }}</td>
+								<td>{{ cliente.empresa.razonSocial }}</td>
+								<td>{{ cliente.empresa.ruc }}</td>
+								<td>{{ cliente.empresa.direccion.descripcion }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li *ngIf="pageNu !== 1 && pageNu !== 2" class="page-item">
+							<a class="page-link pointer" (click)="getClients(pageNu - 2)" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li *ngIf="pageNu !== 1" class="page-item">
+							<a class="page-link pointer" (click)="getClients(pageNu - 1)">{{ pageNu - 1 }}</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link pointer bg-light-info" (click)="getClients(pageNu)">{{ pageNu }}</a>
+						</li>
+						<li *ngIf="pageNu !== pages" class="page-item">
+							<a class="page-link pointer" (click)="getClients(pageNu + 1)">{{ pageNu + 1 }}</a>
+						</li>
+						<li *ngIf="pageNu !== pages && pageNu != pages - 1" class="page-item">
+							<a class="page-link pointer" (click)="getClients(pageNu + 2)" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="row">
+					<div class="col-md-6">
+						<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+							<i class="fa fa-plus fa-fw"></i>Nuevo
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="row">
+	<div class="col-md-1">
+		Pág.
+	</div>
+	<div class="col-md-1">
+		<select class="form-control custom-select" (change)="getClients($event.target.value)">
+			<option *ngFor="let page of pages; index as i" [value]="i + 1" [selected]="pageNu">{{ i + 1 }}</option>
+		</select>
+	</div>
+</div> -->

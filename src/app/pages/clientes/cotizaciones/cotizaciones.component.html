@@ -1,0 +1,95 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<input
+								#start
+								[(ngModel)]="startDate"
+								name="startDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<input
+								#end
+								[(ngModel)]="endDate"
+								name="endDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<button class="btn btn-outline-info btn-block mb-2" (click)="search(start.value, end.value)">
+								<i class="fa fa-search fa-fw"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Cotizaciones</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th></th>
+								<th>Id</th>
+								<th>Propietario</th>
+								<th colspan="2">Cliente</th>
+								<th>Etapa</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								class="pointer"
+								*ngFor="let cotizacion of cotizaciones"
+								(dblclick)="seleccionar(cotizacion)"
+							>
+								<td>
+									<button class="btn btn-outline-secondary btn-sm" (click)="seleccionar(cotizacion)">
+										<i class="fa fa-pencil"></i>
+									</button>
+								</td>
+								<td>{{ cotizacion.id }}</td>
+								<td>{{ cotizacion.vendedorName }}</td>
+								<td>{{ cotizacion.clientDocument }}</td>
+								<td>{{ cotizacion.clientName }}</td>
+								<td>{{ cotizacion.etapa }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+					<i class="fa fa-plus fa-fw"></i>Nuevo
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

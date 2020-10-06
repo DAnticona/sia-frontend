@@ -1,264 +1,238 @@
-<div class="row">
-	<div class="col-8">
+<div class="row animated fadeIn">
+	<div class="col-lg-7">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Datos Personales</h4>
-				<h6 class="card-subtitle">{{ usuario.nombres }} {{ usuario.apellidoPaterno }}</h6>
-				<table class="table table-borderless">
-					<tbody>
-						<tr *ngIf="!editarNoPers">
-							<th>Nombres</th>
-							<td>{{ usuario.nombres }}</td>
-							<td>
-								<button (click)="editarNoPers = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarNoPers">
-							<th>Nombres</th>
-							<td>
+				<h6 class="card-subtitle">{{ usuario.username }}</h6>
+				<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f)" class="form p-t-20">
+					<fieldset [disabled]="false">
+						<div class="form-group">
+							<label for="exampleInputuname">Id</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-check-box"></i></div>
+								<input
+									[(ngModel)]="usuario.idPersona"
+									name="idPersona"
+									type="text"
+									class="form-control"
+									readonly="readonly"
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputuname">Tipo de Documento</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+								<select
+									class="form-control custom-select"
+									[(ngModel)]="usuario.idTipoDocumento"
+									name="idTipoDocumento"
+								>
+									<option [ngValue]="tidoc.idTipoDocumento" *ngFor="let tidoc of tidocs">
+										{{ tidoc.nombre }}
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputuname">Documento de Identidad</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+								<input
+									[(ngModel)]="usuario.numeroDocumento"
+									name="numeroDocumento"
+									type="text"
+									class="form-control"
+									placeholder="Nro de documento"
+									required
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputuname">Nombre</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-user"></i></div>
 								<input
 									[(ngModel)]="usuario.nombres"
 									name="nombres"
 									type="text"
-									class="form-control form-control-sm"
+									class="form-control"
 									placeholder="Nombres"
+									required
 								/>
-							</td>
-							<td>
-								<button (click)="editarNoPers = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
-								</button>
-								<button (click)="editarNoPers = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="!editarApPate">
-							<th>Apellido Paterno</th>
-							<td>{{ usuario.apellidoPaterno }}</td>
-							<td>
-								<button (click)="editarApPate = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarApPate">
-							<th>Apellido Paterno</th>
-							<td>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputuname">Apellido Paterno</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-user"></i></div>
 								<input
 									[(ngModel)]="usuario.apellidoPaterno"
 									name="apellidoPaterno"
 									type="text"
-									class="form-control form-control-sm"
-									placeholder="Apellido paterno"
+									class="form-control"
+									placeholder="Apellido Paterno"
+									required
 								/>
-							</td>
-							<td>
-								<button (click)="editarApPate = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
-								</button>
-								<button (click)="editarApPate = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="!editarApMate">
-							<th>Apellido Materno</th>
-							<td>{{ usuario.apellidoMaterno }}</td>
-							<td>
-								<button (click)="editarApMate = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarApMate">
-							<th>Apellido Materno</th>
-							<td>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputuname">Apellido Materno</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-user"></i></div>
 								<input
 									[(ngModel)]="usuario.apellidoMaterno"
 									name="apellidoMaterno"
 									type="text"
-									class="form-control form-control-sm"
-									placeholder="Apellido materno"
+									class="form-control"
+									placeholder="Apellido Materno"
 								/>
-							</td>
-							<td>
-								<button (click)="editarApMate = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
-								</button>
-								<button (click)="editarApMate = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="!editarCorreo">
-							<th>Correo Electrónico</th>
-							<td>{{ usuario.email }}</td>
-							<td>
-								<button (click)="editarCorreo = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarCorreo">
-							<th>Correo Electrónico</th>
-							<td>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label>Género</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input
+									class="form-check-input"
+									[(ngModel)]="usuario.sexo"
+									type="radio"
+									name="sexo"
+									id="inlineRadio1"
+									value="M"
+								/>
+								<label class="form-check-label" for="inlineRadio1">Masculino</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input
+									class="form-check-input"
+									[(ngModel)]="usuario.sexo"
+									type="radio"
+									name="sexo"
+									id="inlineRadio2"
+									value="F"
+								/>
+								<label class="form-check-label" for="inlineRadio2">Femenino</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Correo electrónico</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-email"></i></div>
 								<input
 									[(ngModel)]="usuario.email"
 									name="email"
 									type="email"
-									class="form-control form-control-sm"
-									placeholder="Correo electrónico"
+									class="form-control"
+									placeholder="Correo electronico"
+									required
 								/>
-							</td>
-							<td>
-								<button (click)="editarCorreo = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
-								</button>
-								<button (click)="editarCorreo = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="!editarSexo">
-							<th>Sexo</th>
-							<td>{{ usuario.sexo }}</td>
-							<td>
-								<button (click)="editarSexo = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarSexo">
-							<th>Sexo</th>
-							<td>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input
-										[(ngModel)]="usuario.sexo"
-										name="sexo"
-										type="radio"
-										id="customRadioInline1"
-										name="customRadioInline1"
-										class="custom-control-input"
-										value="M"
-									/>
-									<label class="custom-control-label" for="customRadioInline1">Masculino</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input
-										[(ngModel)]="usuario.sexo"
-										name="sexo"
-										type="radio"
-										id="customRadioInline2"
-										name="customRadioInline1"
-										class="custom-control-input"
-										value="F"
-									/>
-									<label class="custom-control-label" for="customRadioInline2">Femenino</label>
-								</div>
-							</td>
-							<td>
-								<button (click)="editarSexo = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
-								</button>
-								<button (click)="editarSexo = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Fecha Nacimiento</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+								<input
+									[(ngModel)]="usuario.fechaNacimiento"
+									name="fechaNacimiento"
+									type="date"
+									class="form-control"
+								/>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+							<i
+								class="fa fa-save fa-fw"
+								[ngClass]="{ 'fa-spinner fa-pulse': cargando, 'fa-save': !cargando }"
+							></i>
+							Guardar
+						</button>
+					</fieldset>
+				</form>
 			</div>
 		</div>
 	</div>
-	<div class="col-4">
-		<div class="card">
-			<div class="card-body text-center">
-				<h4 class="card-title">Imagen de Usuario</h4>
-				<h6 class="card-subtitle">{{ usuario.nombres }} {{ usuario.apellidoPaterno }}</h6>
-				<img *ngIf="usuario.imagen" [src]="usuario.imagen" class="img-200" />
-			</div>
-		</div>
-	</div>
-</div>
 
-<div class="row">
-	<div class="col-8">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title">Datos de Usuario</h4>
-				<h6 class="card-subtitle">{{ usuario.nombres }} ({{ usuario.rol.nombre }})</h6>
-				<table class="table table-borderless">
-					<tbody>
-						<tr>
-							<th>Nombre de usuario</th>
-							<td>{{ usuario.nombres }}</td>
-							<td></td>
-						</tr>
-						<tr>
-							<th>Rol</th>
-							<td>{{ usuario.rol.nombre }}</td>
-							<td></td>
-						</tr>
-						<tr *ngIf="!editarPasswd">
-							<th>Contraseña</th>
-							<td>******</td>
-							<td>
-								<button (click)="editarPasswd = true" class="btn btn-outline-primary">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
-						<tr *ngIf="editarPasswd">
-							<th>Contraseña</th>
-							<td>
+	<div class="col-lg-5">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Imagen de usuario</h4>
+						<h6 class="card-subtitle">{{ usuario.username }}</h6>
+						<!-- <img *ngIf="!imagenTemp" [src]="user.img | imagen" class="w150" /> -->
+						<!-- <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150" /> -->
+						<div class="text-center">
+							<label class="file-input pointer">
 								<input
-									ngModel
-									name="password"
-									type="password"
-									class="form-control form-control-sm"
-									placeholder="Contraseña actual"
+									name="changeImage"
+									type="file"
+									(change)="seleccionImagen($event.target.files[0])"
+									hidden
 								/>
-							</td>
-							<td></td>
-						</tr>
-						<tr *ngIf="editarPasswd">
-							<th>Nueva Contarseña</th>
-							<td>
+								<img [src]="usuario.imagen | imagen" class="w150" alt="user" />
+							</label>
+						</div>
+						<div class="text-center">
+							<!-- [disabled]="!imagenSubir" -->
+							<button
+								(click)="cambiarImagen()"
+								type="button"
+								class="btn btn-success waves-effect waves-light m-r-10"
+							>
+								<i class="fa fa-save fa-fw"></i>
+								Guardar imagen
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Cambio de Contraseña</h4>
+						<h6 class="card-subtitle">{{ usuario.username }}</h6>
+						<form>
+							<div class="form-group">
+								<label for="password1">Nueva Contraseña</label>
 								<input
-									ngModel
-									name="passwd1"
+									#password1
 									type="password"
-									class="form-control form-control-sm"
-									placeholder="Nueva Contraseña"
+									class="form-control"
+									id="password1"
+									(keyup)="checkPassword(password1.value, password2.value)"
+									placeholder="Ingrese la nueva contraseña"
 								/>
-							</td>
-							<td></td>
-						</tr>
-						<tr *ngIf="editarPasswd">
-							<th>Repetir Contarseña</th>
-							<td>
+							</div>
+							<div class="form-group">
+								<label for="password2">Repetir Contraseña</label>
 								<input
-									ngModel
-									name="passwd2"
+									#password2
 									type="password"
-									class="form-control form-control-sm"
-									placeholder="Nueva Contraseña"
+									class="form-control"
+									id="password2"
+									(keyup)="checkPassword(password1.value, password2.value)"
+									placeholder="Vuelva a ingresar la nueva contraseña"
 								/>
-							</td>
-							<td>
-								<button (click)="editarPasswd = false" class="btn btn-outline-success">
-									<i class="fa fa-save"></i>
+							</div>
+							<div class="text-center">
+								<button
+									type="button"
+									[disabled]="!iguales"
+									[ngClass]="{ 'btn btn-success': iguales, 'button-disabled': !iguales }"
+									(click)="changePassword(password1.value)"
+								>
+									<i class="fa fa-save fa-fw"></i>
+									Cambiar Contraseña
 								</button>
-								<button (click)="editarPasswd = false" class="btn btn-outline-dark">
-									<i class="fa fa-close"></i>
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

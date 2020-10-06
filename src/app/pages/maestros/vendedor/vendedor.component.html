@@ -1,0 +1,150 @@
+<div class="card">
+	<div class="card-body">
+		<h4 class="card-title">Datos Personales</h4>
+		<h6 class="card-subtitle">{{ vendedor.nombres }}</h6>
+		<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+			<div class="form-group">
+				<label for="exampleInputuname">Id</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="ti-check-box"></i></div>
+					<input [(ngModel)]="vendedor.id" name="id" type="text" class="form-control" readonly="readonly" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputuname">Tipo de Documento</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+					<select
+						class="form-control custom-select"
+						[(ngModel)]="vendedor.idTipoDocumento"
+						name="idTipoDocumento"
+					>
+						<option value="1">DNI</option>
+						<option value="2">C. EXT.</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputuname">Documento de Identidad</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+					<input
+						[(ngModel)]="vendedor.nuDocumento"
+						name="nuDocumento"
+						type="text"
+						class="form-control"
+						placeholder="Nro de documento"
+						required
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputuname">Nombre</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="ti-user"></i></div>
+					<input
+						[(ngModel)]="vendedor.nombres"
+						name="nombres"
+						type="text"
+						class="form-control"
+						placeholder="Nombres"
+						required
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputuname">Apellido Paterno</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="ti-user"></i></div>
+					<input
+						[(ngModel)]="vendedor.apPaterno"
+						name="apPaterno"
+						type="text"
+						class="form-control"
+						placeholder="Apellido Paterno"
+						required
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputuname">Apellido Materno</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="ti-user"></i></div>
+					<input
+						[(ngModel)]="vendedor.apMaterno"
+						name="apMaterno"
+						type="text"
+						class="form-control"
+						placeholder="Apellido Materno"
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<label>Género</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input
+						class="form-check-input"
+						[(ngModel)]="vendedor.sexo"
+						type="radio"
+						name="sexo"
+						id="inlineRadio1"
+						value="M"
+					/>
+					<label class="form-check-label" for="inlineRadio1">Masculino</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input
+						class="form-check-input"
+						[(ngModel)]="vendedor.sexo"
+						type="radio"
+						name="sexo"
+						id="inlineRadio2"
+						value="F"
+					/>
+					<label class="form-check-label" for="inlineRadio2">Femenino</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Correo electrónico</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="ti-email"></i></div>
+					<input
+						[(ngModel)]="vendedor.email"
+						name="email"
+						type="email"
+						class="form-control"
+						placeholder="Correo electronico"
+						required
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Fecha Nacimiento</label>
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+					<input
+						[ngModel]="vendedor.feNacimiento | date: 'yyy-MM-dd'"
+						(ngModelChange)="vendedor.feNacimiento = $event"
+						name="feNacimiento"
+						type="date"
+						class="form-control"
+					/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+						<i class="fa fa-arrow-left fa-fw"></i>
+						Volver
+					</button>
+					<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+						<i class="fa fa-save fa-fw"></i>
+						Guardar
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

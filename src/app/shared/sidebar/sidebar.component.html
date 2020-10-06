@@ -9,28 +9,40 @@
 			<ul id="sidebarnav">
 				<li class="user-profile">
 					<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-						<img [src]="usuario.imagen" alt="user" />
-						<span class="hide-menu">{{ usuario.nombres }} {{ usuario.apellidoPaterno }} </span>
+						<img [src]="usuarioService.usuario.imagen | imagen" alt="user" />
+						<span class="hide-menu">{{ usuarioService.usuario.nombres }} </span>
 					</a>
 					<ul aria-expanded="false" class="collapse">
-						<li><a routerLinkActive="active" [routerLink]="['/bienvenido']">Bienvenido</a></li>
-						<li><a routerLinkActive="active" [routerLink]="['/mi-perfil']">Mi Perfil</a></li>
-						<li><a (click)="logout()" class="pointer">Cerrar sesión</a></li>
+						<li>
+							<a routerLinkActive="active" [routerLink]="['/bienvenido']">
+								<i class="fa fa-home fa-fw"></i>Bienvenido
+							</a>
+						</li>
+						<li>
+							<a routerLinkActive="active" [routerLink]="['/mi-perfil']">
+								<i class="fa fa-user fa-fw"></i>Mi Perfil
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" (click)="usuarioService.logout()" class="pointer">
+								<i class="fa fa-power-off fa-fw"></i>Cerrar Sesión
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li class="nav-devider"></li>
 				<li class="nav-small-cap">MENÚ</li>
-				<li *ngFor="let m of menu">
+				<li *ngFor="let m of menus">
 					<a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
 						<i [class]="m.icono"></i>
 						<span class="hide-menu">
-							{{ m.titulo }}
+							{{ m.nombre }}
 							<span class="label label-rouded label-themecolor pull-right">{{ m.submenu.length }}</span>
 						</span>
 					</a>
 					<ul aria-expanded="false" class="collapse">
 						<li *ngFor="let sm of m.submenu">
-							<a routerLinkActive="active" [routerLink]="[sm.url]">{{ sm.titulo }}</a>
+							<a routerLinkActive="active" [routerLink]="[sm.ruta]">{{ sm.nombre }}</a>
 						</li>
 					</ul>
 				</li>

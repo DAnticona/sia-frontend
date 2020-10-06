@@ -1,0 +1,44 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista Comercial</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th>Id</th>
+								<th>Nro. Documento</th>
+								<th>Nombres</th>
+								<th>Ap. Paterno</th>
+								<th>Ap Materno</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="pointer" *ngFor="let vendedor of vendedores" (dblclick)="seleccionar(vendedor)">
+								<td>{{ vendedor.idPersona }}</td>
+								<td>{{ vendedor.numeroDocumento }}</td>
+								<td>{{ vendedor.nombres }}</td>
+								<td>{{ vendedor.apellidoPaterno }}</td>
+								<td>{{ vendedor.apellidoMaterno }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+					<i class="fa fa-plus fa-fw"></i>Nuevo
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

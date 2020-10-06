@@ -1,0 +1,107 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Desde</label>
+						<div class="form-group">
+							<input
+								#start
+								[(ngModel)]="startDate"
+								name="startDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value, numero.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label>Hasta</label>
+						<div class="form-group">
+							<input
+								#end
+								[(ngModel)]="endDate"
+								name="endDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value, numero.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label>Nro. Declaración</label>
+						<div class="form-group">
+							<input
+								#numero
+								name="numero"
+								type="text"
+								class="form-control"
+								(change)="search(start.value, end.value, numero.value)"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Tarjetas</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th>Tarjeta</th>
+								<th>Fch. Apert.</th>
+								<th>Código</th>
+								<th>Razón Social</th>
+								<th>Peso</th>
+								<th>Bultos</th>
+								<th>CIF US$</th>
+								<th>Observaciones</th>
+								<th>Fch. DUA</th>
+								<th>Fecha</th>
+								<th>DUA</th>
+								<th>Manifiesto</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="pointer" *ngFor="let d of dams" (dblclick)="ingresar(d)">
+								<td>{{ d.nroOrden }}</td>
+								<td>{{ d.fecha | date: 'dd/MM/yyyy' }}</td>
+								<td>{{ d.cliente.coClie }}</td>
+								<td>{{ d.cliente.raSoc }}</td>
+								<td>{{ d.peso | number: '1.2-2' }}</td>
+								<td>{{ d.bultos | number: '1.0-0' }}</td>
+								<td>{{ d.cif | number: '1.2-2' }}</td>
+								<td>{{ d.observaciones }}</td>
+								<td>{{ d.fechaNumeracion | date: 'dd/MM/yyyy' }}</td>
+								<td>{{ d.fechaVcto | date: 'dd/MM/yyyy' }}</td>
+								<td>{{ d.nroDUA }}</td>
+								<td>{{ d.nroManifiesto }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+					<i class="fa fa-plus fa-fw"></i>Nuevo
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

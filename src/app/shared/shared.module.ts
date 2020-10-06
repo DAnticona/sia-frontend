@@ -10,6 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 		FooterComponent,
 		NopagefoundComponent,
 	],
-	imports: [RouterModule, CommonModule],
+	imports: [RouterModule, CommonModule, PipesModule],
 	exports: [HeaderComponent, SidebarComponent, BreadcrumbsComponent, FooterComponent, NopagefoundComponent],
 })
 export class SharedModule {}

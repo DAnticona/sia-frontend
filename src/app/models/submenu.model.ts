@@ -1,4 +1,6 @@
 export class Submenu {
-	titulo: string;
-	url: string;
+	id: number;
+	nombre: string;
+	orden: number;
+	ruta: string;
 }

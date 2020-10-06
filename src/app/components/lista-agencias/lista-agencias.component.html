@@ -1,0 +1,54 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div *ngIf="!cargando" class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-hover color-table info-table table-sm txt-10">
+				<thead>
+					<tr class="text-sm-center">
+						<th>Id</th>
+						<th>RUC</th>
+						<th>Código Aduana</th>
+						<th>Razón Social</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						class="pointer"
+						*ngFor="let a of agencias"
+						(dblclick)="send()"
+						[ngClass]="{ 'bg-light-info': agencia.idEmpresa == a.idEmpresa }"
+						(click)="select(a)"
+					>
+						<td>{{ a.idEmpresa }}</td>
+						<td>{{ a.ruc }}</td>
+						<td>{{ a.codigoAduana }}</td>
+						<td>{{ a.razonSocial }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-right">
+				<button class="btn btn-outline-danger waves-effect waves-light m-r-10" (click)="cancelar()">
+					Cancelar
+				</button>
+				<button
+					type="submit"
+					class="btn btn-outline-success waves-effect waves-light m-r-10"
+					(click)="send()"
+				>
+					Seleccionar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,362 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Cotización Nro. {{ cotizacion.id }}</h4>
+				<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+					<fieldset [disabled]="cargando">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="idCotizacion">Id Cotización</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-check-box"></i></div>
+										<input
+											[(ngModel)]="cotizacion.id"
+											name="id"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fechaCotizacion">Fecha</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input [(ngModel)]="cotizacion.fecha" name="fecha" type="date" class="form-control" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Id Cliente</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#clientes"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="cotizacion.idCliente"
+											name="idCliente"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Cliente</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-user"></i></div>
+										<input
+											[(ngModel)]="cotizacion.nombreCliente"
+											name="nombreCliente"
+											type="text"
+											class="form-control"
+											readonly
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Propietario de la cotización</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#sellers"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="cotizacion.nombreVendedor"
+											name="nombreVendedor"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Agencia de Aduanas</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#agencias"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="cotizacion.agencia"
+											name="agencia"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Etapa</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-retweet"></i></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="cotizacion.etapa"
+											name="etapa"
+											required
+										>
+											<option value="C">Creado</option>
+											<option value="E">Enviado</option>
+											<option value="A">Aceptado</option>
+											<option value="N">Negociación</option>
+											<option value="R">Reemplazado</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Moneda</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-money"></i></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="cotizacion.idMoneda"
+											name="idMoneda"
+											required
+										>
+											<option *ngFor="let m of monedas" [ngValue]="m.idMoneda">{{ m.nombre }}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Referencia</label>
+									<div class="input-group">
+										<input
+											[(ngModel)]="cotizacion.referencia"
+											name="referencia"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Observaciones</label>
+									<div class="input-group">
+										<textarea
+											[(ngModel)]="cotizacion.observaciones"
+											name="observaciones"
+											class="form-control"
+											rows="5"
+										></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h4 class="card-title">Detalles de la cotización</h4>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<fieldset>
+										<table class="table">
+											<thead>
+												<tr>
+													<th class="text-center">Descripción</th>
+													<th class="text-center">Importe S/.</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="pointer">
+													<td>
+														<input
+															name="serviceName"
+															[(ngModel)]="item.serviceName"
+															[value]="item.serviceName"
+															type="text"
+															class="form-control form-control-sm"
+														/>
+													</td>
+													<td>
+														<input
+															name="totalPrice"
+															[(ngModel)]="item.totalPrice"
+															[value]="item.totalPrice"
+															type="text"
+															class="form-control form-control-sm"
+														/>
+													</td>
+												</tr>
+												<tr>
+													<th colspan="6">
+														<button
+															type="button"
+															class="btn btn-info waves-effect waves-light m-r-10"
+															(click)="addItem()"
+														>
+															<i class="fa fa-plus fa-fw"></i>
+														</button>
+													</th>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset>
+								</div>
+								<div class="row">
+									<div class="col-md-6"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+									<i class="fa fa-arrow-left fa-fw"></i>
+									Volver
+								</button>
+								<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+									<i
+										class="fa fa-fw"
+										[ngClass]="{ 'fa-save': !cargando, 'fa-spinner fa-pulse': cargando }"
+									></i>
+									Guardar
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Clientes -->
+<div
+	class="modal fade"
+	id="clientes"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="clientesLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ubicacionLabel">Clientes</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<app-lista-clientes (selected)="getClient($event)"></app-lista-clientes>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Propietario -->
+<div
+	class="modal fade"
+	id="sellers"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="sellersLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ubicacionLabel">Comerciales</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<app-lista-vendedores (selected)="getSeller($event)"></app-lista-vendedores>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Agencias de Aduana -->
+<div
+	class="modal fade"
+	id="agencias"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="agenciasLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ubicacionLabel">Agencias de Aduana</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<app-lista-agencias (selected)="getAgencia($event)"></app-lista-agencias>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Nuevo Servicio -->
+<div
+	class="modal fade"
+	id="servicios"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="serviciosLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="servicioLabel">Servicios</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<app-lista-servicios (selected)="getServicio($event)"></app-lista-servicios>
+			</div>
+		</div>
+	</div>
+</div>

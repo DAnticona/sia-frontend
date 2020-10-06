@@ -1,0 +1,80 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-body">
+		<h4 class="card-title">Datos de la Empresa</h4>
+		<h6 class="card-subtitle">{{ empresa.username }}</h6>
+		<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f)" class="form p-t-20">
+			<fieldset [disabled]="cargando">
+				<div class="form-group">
+					<label for="exampleInputuname">Id</label>
+					<div class="input-group">
+						<div class="input-group-addon"><i class="ti-check-box"></i></div>
+						<input [(ngModel)]="empresa.id" name="id" type="text" class="form-control" readonly="readonly" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputuname">RUC</label>
+					<div class="input-group">
+						<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+						<input
+							[(ngModel)]="empresa.ruc"
+							#ruc
+							minlength="11"
+							maxlength="11"
+							name="ruc"
+							type="text"
+							class="form-control"
+							placeholder="RUC"
+							(focusout)="search(ruc.value)"
+							required
+						/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputuname">Razón Social</label>
+					<div class="input-group">
+						<div class="input-group-addon"><i class="ti-user"></i></div>
+						<input
+							[(ngModel)]="empresa.razonSocial"
+							name="razonSocial"
+							type="text"
+							class="form-control"
+							placeholder="Razón Social"
+							required
+						/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputuname">Nombre Comercial</label>
+					<div class="input-group">
+						<div class="input-group-addon"><i class="ti-user"></i></div>
+						<input
+							[(ngModel)]="empresa.nombreComercial"
+							name="nombreComercial"
+							type="text"
+							class="form-control"
+							placeholder="Nombre Comercial"
+						/>
+					</div>
+				</div>
+				<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+					<i class="fa fa-arrow-left fa-fw"></i>
+					Volver
+				</button>
+				<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+					<i class="fa fa-fw" [ngClass]="{ 'fa-spinner fa-pulse': cargando, 'fa-save': !cargando }"></i>
+					Guardar
+				</button>
+			</fieldset>
+		</form>
+	</div>
+</div>

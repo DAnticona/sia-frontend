@@ -1,5 +1,5 @@
 import { Menu } from '../models/menu.model';
-export const MENU: Menu[] = [
+export const MENU: any[] = [
 	{
 		titulo: 'Maestros',
 		icono: 'mdi mdi-table-large',

@@ -1,0 +1,75 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">{{ aduana.nombre }}</h4>
+				<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+					<fieldset [disabled]="cargando">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="idAduana">Id</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-check-box"></i></div>
+										<input
+											[(ngModel)]="aduana.id"
+											name="id"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="codigoAduana">Cód. Aduana</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-user"></i></div>
+										<input
+											[(ngModel)]="aduana.codigoAduana"
+											name="codigoAduana"
+											type="text"
+											class="form-control"
+											placeholder="Código de Aduana"
+											required
+										/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="nombreAduana">Nombre</label>
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-address-card-o"></i>
+										</div>
+										<input
+											[(ngModel)]="aduana.nombre"
+											name="nombre"
+											type="text"
+											class="form-control"
+											placeholder="Nombre del área"
+											required
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+									<i class="fa fa-arrow-left fa-fw"></i>
+									Volver
+								</button>
+								<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+									<i
+										class="fa fa-fw"
+										[ngClass]="{ 'fa-save': !cargando, 'fa-spinner fa-pulse': cargando }"
+									></i>
+									Guardar
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

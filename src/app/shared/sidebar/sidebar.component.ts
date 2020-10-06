@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario/usuario.service';
-import { Usuario } from '../../models/usuario.model';
 import { Menu } from '../../models/menu.model';
 
 @Component({
@@ -11,20 +10,12 @@ import { Menu } from '../../models/menu.model';
 })
 export class SidebarComponent implements OnInit {
 	error: string;
-	usuario: Usuario;
-	menu: Menu[] = [];
-	constructor(public router: Router, public usuarioService: UsuarioService) {}
-
-	ngOnInit(): void {
+	usuario: any = {};
+	menus: any[] = [];
+	constructor(public router: Router, public usuarioService: UsuarioService) {
 		this.usuario = this.usuarioService.usuario;
-		this.menu = this.usuarioService.menu;
+		this.menus = this.usuarioService.menus;
 	}
 
-	public logout(): void {
-		if (!this.usuarioService.logout()) {
-			this.error = 'Ocurrió un error, comuníquese con el administrador del sistema';
-			return;
-		}
-		this.router.navigate(['/login']);
-	}
+	ngOnInit(): void {}
 }

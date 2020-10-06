@@ -1,30 +1,6 @@
-import { Empresa } from './empresa.model';
-export class Cliente extends Empresa {
-	coClie: string;
-	nuCarta: string;
-	feCarta: Date;
-	tarifaMinima: number;
-	comision: number;
-	tiMoneda: string;
-	pctMerca: number;
-	facCont20: number;
-	facCont40: number;
-	facCargSuelta30m3: number;
-	facPolSeguro: number;
-	vaPctSeguro: number;
-	monCargSuelta15m3: number;
-	monCont20: number;
-	monCont40: number;
-	monAlq4Tn2H: number;
-	estCargSuelta20m3: number;
-	estCont20: number;
-	estCont40: number;
-	despParcial: number;
-	servExtraXHora: number;
-	movCarga0a20m3: number;
-	movCarga20a35m3: number;
-	movCarga40a60m3: number;
-	forrCargaCont20: number;
-	forrCargaCont40: number;
-	forrCargaSuelta: number;
+export class Cliente {
+	id: number;
+	idTipoPersona: number;
+	idEmpresa: number;
+	idPersona: number;
 }

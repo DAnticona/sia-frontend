@@ -1,7 +1,8 @@
 import { Submenu } from './submenu.model';
 export class Menu {
-	titulo: string;
+	id: number;
+	nombre: string;
 	icono: string;
-	noRol: string;
+	orden: number;
 	submenu: Submenu[];
 }

@@ -1,12 +1,11 @@
-import { Persona } from './persona.model';
 export class Empresa {
-	coEmp: string;
-	nuDoc: string;
-	raSoc: string;
-	direc?: string;
-	dpto?: string;
-	prov?: string;
-	dist?: string;
-	pais?: string;
-	contacto?: Persona;
+	id: number;
+	raSocial: string;
+	noComercial: string;
+	ruc: string;
+	idDireccion: string;
+	idDistrito: number;
+	idProvincia: number;
+	idDepartamento: number;
+	idPais: number;
 }

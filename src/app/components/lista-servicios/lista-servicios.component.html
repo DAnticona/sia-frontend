@@ -1,0 +1,78 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Grupo</label>
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-cubes"></i></div>
+				<select class="form-control custom-select" [(ngModel)]="servicio.idGrupo" name="idGrupo" required>
+					<option *ngFor="let g of grupos" [ngValue]="g.idGrupo">{{ g.nombre }}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Servicio</label>
+			<div class="input-group">
+				<div class="input-group-addon"><i class="fa fa-cube"></i></div>
+				<select
+					class="form-control custom-select"
+					[(ngModel)]="servicio.idServicio"
+					name="idServicio"
+					required
+				>
+					<option *ngFor="let s of servicios" [ngValue]="s.idServicio">{{ s.nombre }}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h5>Facturación mínima</h5>
+		<div class="table-responsive">
+			<fieldset>
+				<table class="table">
+					<!-- <thead>
+                        <tr>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Importe S/.</th>
+                        </tr>
+                    </thead> -->
+					<tbody>
+						<tr class="pointer" *ngFor="let ss of subservicios">
+							<td>
+								<input
+									name="serviceName"
+									[(ngModel)]="ss.nombre"
+									[value]="ss.nombre"
+									type="text"
+									class="form-control form-control-sm"
+								/>
+							</td>
+							<td>
+								<input
+									name="totalPrice"
+									[(ngModel)]="ss.precio"
+									[value]="ss.precio"
+									type="text"
+									class="form-control form-control-sm"
+								/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 text-right">
+		<button class="btn btn-outline-danger waves-effect waves-light m-r-10" (click)="cancel()">
+			Cancelar
+		</button>
+		<button type="submit" class="btn btn-outline-success waves-effect waves-light m-r-10" (click)="send()">
+			Seleccionar
+		</button>
+	</div>
+</div>

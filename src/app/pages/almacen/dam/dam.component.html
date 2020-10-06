@@ -1,0 +1,450 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">{{ dam.nuDeclaracionU }}</h4>
+				<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f)" class="form p-t-20">
+					<fieldset [disabled]="cargando">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Id</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-check-box"></i></div>
+										<input
+											[(ngModel)]="dam.id"
+											name="id"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Aduana</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faLandmark"></fa-icon></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="dam.idAduana"
+											name="idAduana"
+											required
+										>
+											<option *ngFor="let a of aduanas" [ngValue]="a.idAduana">
+												{{ a.codigoAduana }} - {{ a.nombre }}
+											</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Nro. Declaración</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-hashtag"></i></div>
+										<input
+											[(ngModel)]="dam.numeroDeclaracion"
+											name="numeroDeclaracion"
+											type="text"
+											class="form-control"
+											required
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Destinación</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faDotCircle"></fa-icon></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="dam.idRegimen"
+											name="idRegimen"
+											required
+										>
+											<option *ngFor="let r of regimenes" [ngValue]="r.idRegimen">
+												{{ r.codigoAduana }} - {{ r.nombre }}
+											</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">1. Identificación</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Id Cliente</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#clientes"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="dam.idCliente"
+											name="idCliente"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Razón Social del Cliente</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-industry"></i></div>
+										<input
+											[(ngModel)]="dam.nombreCliente"
+											name="nombreCliente"
+											type="text"
+											class="form-control"
+											readonly
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Dirección del cliente</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-map"></i></div>
+										<input
+											[(ngModel)]="dam.direccionCliente"
+											name="direccionCliente"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">2. Registro de Aduana</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Nro. Declaración</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-hashtag"></i></div>
+										<input
+											[(ngModel)]="dam.numeroDeclaracionUnico"
+											name="numeroDeclaracionUnico"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Fecha Numeración</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input
+											[(ngModel)]="dam.fechaNumeracion"
+											name="fechaNumeracion"
+											type="date"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">3. Transporte</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Empresa Transporte</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#clientes"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="dam.idCliente"
+											name="idCliente"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Nro. Manifiesto</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-hashtag"></i></div>
+										<input
+											[(ngModel)]="dam.nombreCliente"
+											name="nombreCliente"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">4. Almacén</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Depósito Temporal</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#depositos"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="dam.idDeposito"
+											name="idDeposito"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Fecha Vencimiento</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input
+											[(ngModel)]="dam.fechaVencimiento"
+											name="fechaVencimiento"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">6. Valor Aduana</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>FOB</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faMoneyBill"></fa-icon></div>
+										<input [(ngModel)]="dam.fob" name="fob" type="text" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Flete</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faMoneyBill"></fa-icon></div>
+										<input [(ngModel)]="dam.flete" name="flete" type="text" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Seguro</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faMoneyBill"></fa-icon></div>
+										<input [(ngModel)]="dam.seguro" name="seguro" type="text" class="form-control" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Ajuste</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faMoneyBill"></fa-icon></div>
+										<input [(ngModel)]="dam.ajuste" name="ajuste" type="text" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Total</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faMoneyBill"></fa-icon></div>
+										<input [(ngModel)]="dam.total" name="total" type="text" class="form-control" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">7. Declaración de Mercancía</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Documento Transporte</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faTruck"></fa-icon></div>
+										<input
+											[(ngModel)]="dam.documentoTransporte"
+											name="documentoTransporte"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Clase</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-cubes"></i></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="dam.idTipoBulto"
+											name="idTipoBulto"
+											required
+										>
+											<option *ngFor="let tb of tiposBulto" [ngValue]="tb.idTipoBulto">
+												{{ tb.nombre }}
+											</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Subpartida Nacional</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-file"></i></div>
+										<input
+											[(ngModel)]="dam.subpartidaNacional"
+											name="subpartidaNacional"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Nro. Factura Comercial</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faFileInvoice"></fa-icon></div>
+										<input
+											[(ngModel)]="dam.numeroFacturaComercial"
+											name="numeroFacturaComercial"
+											type="text"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Fecha Factura Comercial</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+										<input
+											[(ngModel)]="dam.fechaFacturaComercial"
+											name="fechaFacturaComercial"
+											type="date"
+											class="form-control"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h5 class="card-title mt-3">8. Declarante</h5>
+						<hr />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Id Agencia de Aduanas</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button
+												class="btn btn-outline-info"
+												type="button"
+												data-toggle="modal"
+												data-target="#agencias"
+											>
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+										<input
+											[(ngModel)]="dam.idAgencia"
+											name="idAgencia"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Agencia de Aduana</label>
+									<div class="input-group">
+										<div class="input-group-addon"><fa-icon [icon]="faUserTie"></fa-icon></div>
+										<input
+											[(ngModel)]="dam.agencia"
+											name="agencia"
+											type="text"
+											class="form-control"
+											readonly
+											required
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+									<i class="fa fa-arrow-left fa-fw"></i>
+									Volver
+								</button>
+								<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+									<i
+										class="fa fa-fw"
+										[ngClass]="{ 'fa-save': !cargando, 'fa-spinner fa-pulse': cargando }"
+									></i>
+									Guardar
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

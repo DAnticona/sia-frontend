@@ -1,0 +1,109 @@
+<div class="card">
+	<div class="card-body">
+		<h4 class="card-title">{{ servicio.nombre }}</h4>
+		<form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f)" class="form p-t-20">
+			<fieldset>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Id</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-check-box"></i></div>
+								<input
+									[(ngModel)]="servicio.id"
+									name="id"
+									type="text"
+									class="form-control"
+									readonly="readonly"
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="grupo">Grupo</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+								<select
+									class="form-control custom-select"
+									[(ngModel)]="servicio.idGrupoServicio"
+									name="idGrupoServicio"
+									required
+								>
+									<option [ngValue]="grupo.idGrupoServicio" *ngFor="let grupo of grupos">
+										{{ grupo.nombre }}
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Servicio</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-link"></i></div>
+								<input
+									[(ngModel)]="servicio.nombre"
+									name="nombre"
+									type="text"
+									class="form-control"
+									placeholder="Nombre del servicio"
+									required
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Precio en Soles</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-link"></i></div>
+								<input
+									[(ngModel)]="servicio.precioMonedaNacional"
+									name="precioMonedaNacional"
+									type="text"
+									class="form-control"
+									placeholder="Precio en Soles"
+									required
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Precio en Dólares</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-link"></i></div>
+								<input
+									[(ngModel)]="servicio.precioMonedaExtranjera"
+									name="precioMonedaExtranjera"
+									type="text"
+									class="form-control"
+									placeholder="Precio en Dólares"
+									required
+								/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox checkbox-primary pull-left p-t-0">
+								<input
+									id="precioPct"
+									[(ngModel)]="precioPct"
+									name="precioPct"
+									type="checkbox"
+									class="filled-in chk-col-light-blue"
+									(change)="changePrecioPct(precioPct ? 'S' : 'N')"
+								/>
+								<label for="precioPct">Precio en %</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+							<i class="fa fa-arrow-left fa-fw"></i>
+							Volver
+						</button>
+						<button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+							<i class="fa fa-save fa-fw"></i>
+							Guardar
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>

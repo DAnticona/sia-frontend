@@ -1,13 +1,12 @@
-import { TipoDocumento } from './tipoDocumento.model';
 export class Persona {
-	idPersona: number;
-	numeroDocumento: number;
-	nombres: string;
-	apellidoPaterno: string;
-	apellidoMaterno: string;
-	sexo: string;
-	fechaNacimiento: Date;
-	email: string;
-	imagen: string;
-	tipoDocumento: TipoDocumento;
+	public id: number;
+	public idTipoDocumento: number;
+	public nuDocumento: string;
+	public nombres: string;
+	public apPaterno: string;
+	public apMaterno: string;
+	public direccion: string;
+	public email: string;
+	public feNacimiento: Date;
+	public sexo: string;
 }

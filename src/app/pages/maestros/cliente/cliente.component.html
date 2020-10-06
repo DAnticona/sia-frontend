@@ -1,0 +1,504 @@
+<div class="row animated fadeIn">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 *ngIf="empresa" class="card-title">{{ empresa.razonSocial }}</h4>
+				<h4 *ngIf="persona" class="card-title">{{ persona.nombres }}</h4>
+				<form ngNativeValidate #f="ngForm" class="form p-t-20">
+					<fieldset [disabled]="cargando">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputuname">Id Cliente</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="ti-check-box"></i></div>
+										<input
+											[(ngModel)]="cliente.idCliente"
+											name="idCliente"
+											type="text"
+											class="form-control"
+											readonly="readonly"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="exampleInputuname">Tipo de Persona</label>
+									<div class="input-group">
+										<div class="input-group-addon"><i class="fa fa-industry"></i></div>
+										<select
+											class="form-control custom-select"
+											[(ngModel)]="cliente.idTipoPersona"
+											name="idTipoPersona"
+											(change)="empresaTab = !empresaTab"
+											[disabled]="!nuevoCliente"
+										>
+											<option [ngValue]="1" selected>Persona Jurídica</option>
+											<option [ngValue]="2">Persona Natural</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-12">
+								<button
+									*ngIf="empresaTab"
+									class="btn btn-outline-info"
+									[disabled]="!nuevoCliente"
+									data-toggle="modal"
+									data-target="#empresas"
+									(click)="searchCompany(1)"
+								>
+									<i class="fa fa-search fa-fw"></i>
+									Buscar Empresa
+								</button>
+								<button
+									*ngIf="!empresaTab"
+									class="btn btn-outline-info"
+									[disabled]="!nuevoCliente"
+									data-toggle="modal"
+									data-target="#personas"
+									(click)="searchPerson(1)"
+								>
+									<i class="fa fa-search fa-fw"></i>
+									Buscar Persona
+								</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs">
+									<li class="nav-item">
+										<a class="nav-link disabled" [ngClass]="{ active: empresaTab }">Empresa</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link disabled" [ngClass]="{ active: !empresaTab }">Persona</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div *ngIf="empresaTab" class="row animated fadeIn">
+							<div class="col-lg-12">
+								<fieldset [disabled]="!nuevoCliente">
+									<div class="form-group">
+										<label for="exampleInputuname">Id Empresa</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-check-box"></i></div>
+											<input
+												[(ngModel)]="empresa.idEmpresa"
+												name="idEmpresa"
+												type="text"
+												class="form-control"
+												readonly="readonly"
+												required
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">RUC</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+											<input
+												[(ngModel)]="empresa.ruc"
+												name="ruc"
+												type="text"
+												class="form-control"
+												placeholder="RUC"
+												readonly="readonly"
+												required
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Razón Social</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-user"></i></div>
+											<input
+												[(ngModel)]="empresa.razonSocial"
+												name="razonSocial"
+												type="text"
+												class="form-control"
+												placeholder="Razón Social"
+												readonly="readonly"
+												required
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Nombre Comercial</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-user"></i></div>
+											<input
+												[(ngModel)]="empresa.nombreComercial"
+												name="nombreComercial"
+												type="text"
+												class="form-control"
+												placeholder="Nombre Comercial"
+												readonly="readonly"
+											/>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+
+						<div *ngIf="!empresaTab" class="row animated fadeIn">
+							<div class="col-lg-12">
+								<fieldset [disabled]="!nuevoCliente">
+									<div class="form-group">
+										<label for="exampleInputuname">Id Persona</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-check-box"></i></div>
+											<input
+												[(ngModel)]="persona.idPersona"
+												name="idPersona"
+												type="text"
+												class="form-control"
+												readonly="readonly"
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Tipo de Documento</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+											<select
+												class="form-control custom-select"
+												[(ngModel)]="persona.idTipoDocumento"
+												name="idTipoDocumento"
+												readonly="readonly"
+												required
+											>
+												<option value="1">DNI</option>
+												<option value="2">C. EXT.</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Documento de Identidad</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+											<input
+												[(ngModel)]="persona.numeroDocumento"
+												name="numeroDocumento"
+												type="text"
+												class="form-control"
+												placeholder="Nro de documento"
+												readonly="readonly"
+												required
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Nombre</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-user"></i></div>
+											<input
+												[(ngModel)]="persona.nombres"
+												name="nombres"
+												type="text"
+												class="form-control"
+												placeholder="Nombres"
+												required
+												readonly="readonly"
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Apellido Paterno</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-user"></i></div>
+											<input
+												[(ngModel)]="persona.apellidoPaterno"
+												name="apellidoPaterno"
+												type="text"
+												class="form-control"
+												placeholder="Apellido Paterno"
+												required
+												readonly="readonly"
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputuname">Apellido Materno</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-user"></i></div>
+											<input
+												[(ngModel)]="persona.apellidoMaterno"
+												name="apellidoMaterno"
+												type="text"
+												class="form-control"
+												placeholder="Apellido Materno"
+												readonly="readonly"
+											/>
+										</div>
+									</div>
+									<div class="form-group">
+										<div>
+											<label>Género</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input
+												class="form-check-input"
+												[(ngModel)]="persona.sexo"
+												type="radio"
+												name="sexo"
+												id="inlineRadio1"
+												value="M"
+												readonly="readonly"
+											/>
+											<label class="form-check-label" for="inlineRadio1">Masculino</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input
+												class="form-check-input"
+												[(ngModel)]="persona.sexo"
+												type="radio"
+												name="sexo"
+												id="inlineRadio2"
+												value="F"
+												readonly="readonly"
+											/>
+											<label class="form-check-label" for="inlineRadio2">Femenino</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Correo electrónico</label>
+										<div class="input-group">
+											<div class="input-group-addon"><i class="ti-email"></i></div>
+											<input
+												[(ngModel)]="persona.email"
+												name="email"
+												type="email"
+												class="form-control"
+												placeholder="Correo electronico"
+												disabled
+											/>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<button class="btn btn-danger waves-effect waves-light m-r-10" (click)="volver()">
+							<i class="fa fa-arrow-left fa-fw"></i>
+							Volver
+						</button>
+						<button class="btn btn-success waves-light m-r-10" (click)="save(f)" [disabled]="!nuevoCliente">
+							<i class="fa fa-fw" [ngClass]="{ 'fa-save': !cargando, 'fa-spinner fa-pulse': cargando }"></i>
+							Guardar
+						</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Buscar Empresa -->
+<div
+	class="modal fade"
+	id="empresas"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="empresasLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="empresasLabel">Búsqueda de Empresas</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<select #tipo class="form-control">
+										<option value="1">RUC</option>
+										<option value="2">Nombre</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<input
+										#termino1
+										type="text"
+										class="form-control"
+										placeholder="Búsqueda de Empresas"
+										(keyup)="filterCompanies(tipo.value, termino1.value)"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-hover color-table info-table table-sm txt-10">
+								<thead>
+									<tr class="text-sm-center">
+										<th>RUC</th>
+										<th>Razón Social</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										class="pointer"
+										*ngFor="let empresa of empresas"
+										[ngClass]="{ 'bg-light-info': idChoosed == empresa.idEmpresa }"
+										(click)="idChoosed = empresa.idEmpresa"
+										(dblclick)="chooseCompany()"
+									>
+										<td>{{ empresa.ruc }}</td>
+										<td>{{ empresa.razonSocial }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<nav *ngIf="empresas.length >= 10" aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<li *ngIf="pageNu !== 1 && pageNu !== 2" class="page-item">
+									<a class="page-link pointer" (click)="searchCompany(pageNu - 2)" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li *ngIf="pageNu !== 1" class="page-item">
+									<a class="page-link pointer" (click)="searchCompany(pageNu - 1)">{{ pageNu - 1 }}</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link pointer bg-light-info" (click)="searchCompany(pageNu)">{{ pageNu }}</a>
+								</li>
+								<li *ngIf="pageNu !== pages" class="page-item">
+									<a class="page-link pointer" (click)="searchCompany(pageNu + 1)">{{ pageNu + 1 }}</a>
+								</li>
+								<li *ngIf="pageNu !== pages && pageNu != pages - 1" class="page-item">
+									<a class="page-link pointer" (click)="searchCompany(pageNu + 2)" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-outline-success" (click)="chooseCompany()">Seleccionar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Buscar Personas -->
+<div
+	class="modal fade"
+	id="personas"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="personasLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="personasLabel">Lista de Personas</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<select #tipo class="form-control">
+										<option value="1">Nro. Doc</option>
+										<option value="2">Nombre</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<input
+										#termino2
+										type="text"
+										class="form-control"
+										placeholder="Búsqueda de Personas"
+										(keyup)="filterPersons(tipo.value, termino2.value)"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-hover color-table info-table table-sm txt-10">
+								<thead>
+									<tr class="text-sm-center">
+										<th>Nro. Documento</th>
+										<th>Nombres</th>
+										<th>Ap. Paterno</th>
+										<th>Ap. Materno</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										class="pointer"
+										*ngFor="let persona of personas"
+										[ngClass]="{ 'bg-light-info': idChoosed == persona.idPersona }"
+										(click)="idChoosed = persona.idPersona"
+										(dblclick)="choosePerson()"
+									>
+										<td>{{ persona.numeroDocumento }}</td>
+										<td>{{ persona.nombres }}</td>
+										<td>{{ persona.apellidoPaterno }}</td>
+										<td>{{ persona.apellidoMaterno }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<nav aria-label="Page navigation example" *ngIf="personas.length > 9">
+							<ul class="pagination justify-content-center">
+								<li *ngIf="pageNu !== 1 && pageNu !== 2" class="page-item">
+									<a class="page-link pointer" (click)="searchPerson(pageNu - 2)" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li *ngIf="pageNu !== 1" class="page-item">
+									<a class="page-link pointer" (click)="searchPerson(pageNu - 1)">{{ pageNu - 1 }}</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link pointer bg-light-info" (click)="searchPerson(pageNu)">{{ pageNu }}</a>
+								</li>
+								<li *ngIf="pageNu !== pages" class="page-item">
+									<a class="page-link pointer" (click)="searchPerson(pageNu + 1)">{{ pageNu + 1 }}</a>
+								</li>
+								<li *ngIf="pageNu !== pages && pageNu != pages - 1" class="page-item">
+									<a class="page-link pointer" (click)="searchPerson(pageNu + 2)" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-outline-success">Seleccionar</button>
+			</div>
+		</div>
+	</div>
+</div>

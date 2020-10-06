@@ -1,0 +1,52 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Áreas</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th></th>
+								<th>Id</th>
+								<th>Nombre</th>
+								<th>Abrev.</th>
+								<th>Estado</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="pointer" *ngFor="let area of areas" (dblclick)="seleccionar(area)">
+								<td>
+									<button class="btn btn-outline-secondary btn-sm" (click)="seleccionar(area)">
+										<i class="fa fa-pencil"></i>
+									</button>
+								</td>
+								<td>{{ area.idArea }}</td>
+								<td>{{ area.nombre }}</td>
+								<td>{{ area.abreviatura }}</td>
+								<td>
+									<span *ngIf="area.activo === 'S'" class="badge badge-success">Activo</span>
+									<span *ngIf="area.activo === 'N'" class="badge badge-secondary">Inactivo</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+					<i class="fa fa-plus fa-fw"></i>Nueva Área
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

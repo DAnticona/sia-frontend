@@ -1,0 +1,96 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Desde</label>
+						<div class="form-group">
+							<input
+								#start
+								[(ngModel)]="startDate"
+								name="startDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value, tipo.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label>Hasta</label>
+						<div class="form-group">
+							<input
+								#end
+								[(ngModel)]="endDate"
+								name="endDate"
+								type="date"
+								class="form-control"
+								(change)="search(start.value, end.value, tipo.value)"
+							/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Tipo</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-filter"></i></div>
+								<select
+									#tipo
+									class="form-control custom-select"
+									name="tipo"
+									(change)="search(start.value, end.value, tipo.value)"
+								>
+									<option value="I">Ingreso</option>
+									<option value="S">Salida</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+	<div class="col-sm-12 text-center">
+		<strong>Cargando</strong>
+		<br />
+		<i class="fa fa-spinner fa-pulse fa-2x"></i>
+		<br />
+		<span>Espere por favor</span>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Tarjetas</h4>
+				<div class="table-responsive">
+					<table class="table table-hover color-table info-table table-sm txt-10">
+						<thead>
+							<tr class="text-sm-center">
+								<th>Id</th>
+								<th>Tarjeta</th>
+								<th>Fecha</th>
+								<th>Tipo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="pointer" *ngFor="let m of movimientos" (dblclick)="ingresar(m)">
+								<td>{{ m.id }}</td>
+								<td>{{ m.idTarjeta }}</td>
+								<td>{{ m.fecha | date: 'dd/MM/yyyy' }}</td>
+								<td>{{ m.fgMovimiento }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button class="btn btn-info waves-effect waves-light m-r-10" (click)="nuevo()">
+					<i class="fa fa-plus fa-fw"></i>Nuevo
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

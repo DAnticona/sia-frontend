@@ -1,5 +1,5 @@
 import { Tarjeta } from '../models/tarjeta.model';
-export const TARJETAS: Tarjeta[] = [
+export const TARJETAS: any[] = [
 	{
 		nroOrden: 12812,
 		viaTransporte: 'ADUANERO MARITIMO',
